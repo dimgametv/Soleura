@@ -542,34 +542,28 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const database = firebase.database();
-
         // Mobile menu toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-
         // Auth Modal
         document.getElementById('openAuthModal').addEventListener('click', function() {
             document.getElementById('authModal').classList.remove('hidden');
         });
-
         document.getElementById('closeAuthModal').addEventListener('click', function() {
             document.getElementById('authModal').classList.add('hidden');
         });
-
         document.getElementById('showLogin').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('signupForm').classList.add('hidden');
         });
-
         document.getElementById('showSignup').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('signupForm').classList.remove('hidden');
         });
-
         // Login Form Submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -591,7 +585,6 @@
                     alert('Login failed: ' + errorMessage);
                 });
         });
-
         // Signup Form Submission
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -613,7 +606,6 @@
                     alert('Signup failed: ' + errorMessage);
                 });
         });
-
         // Logout Functionality
         document.getElementById('logoutButton').addEventListener('click', function() {
             auth.signOut().then(() => {
@@ -624,7 +616,6 @@
                 alert('Logout failed: ' + error.message);
             });
         });
-
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -643,7 +634,6 @@
                 }
             });
         });
-
         // Simple form validation for newsletter
         const newsletterForm = document.querySelector('section.bg-blue-500 form');
         if (newsletterForm) {
@@ -658,7 +648,6 @@
                 }
             });
         }
-
         // View All Products button functionality
         document.getElementById('view-all-products').addEventListener('click', function() {
             const additionalProducts = document.querySelectorAll('.additional-product');
@@ -670,7 +659,6 @@
             });
             this.style.display = 'none';
         });
-
         // Initialize Swiper for testimonials
         document.addEventListener('DOMContentLoaded', function () {
             const swiper = new Swiper('.swiper-container', {
@@ -693,16 +681,13 @@
                 }
             });
         });
-
         // Cart functionality
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
         // Function to update the cart count in the navigation bar
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
             cartCount.textContent = cart.length;
         }
-
         // Function to add an item to the cart
         function addToCart(product) {
             auth.onAuthStateChanged((user) => {
@@ -716,7 +701,6 @@
                 }
             });
         }
-
         // Function to display cart items
         function displayCartItems() {
             auth.onAuthStateChanged((user) => {
@@ -747,7 +731,6 @@
                 }
             });
         }
-
         // Function to remove an item from the cart
         function removeFromCart(index) {
             cart.splice(index, 1);
@@ -755,7 +738,6 @@
             updateCartCount();
             displayCartItems();
         }
-
         // Event listeners for "Add to Cart" buttons
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
@@ -768,7 +750,6 @@
                 addToCart(product);
             });
         });
-
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
@@ -781,13 +762,11 @@
                 }
             });
         });
-
         // Event listener for the checkout button
         document.getElementById('checkout-button').addEventListener('click', function() {
             alert('Proceeding to checkout...');
             // You can add more functionality here, like redirecting to a checkout page
         });
-
         // Initialize cart count on page load
         updateCartCount();
     </script>
