@@ -79,6 +79,9 @@
                     <button id="openAuthModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300">
                         Login/Signup
                     </button>
+                    <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">
+                        Logout
+                    </button>
                 </div>
                 <div class="flex items-center md:hidden">
                     <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
@@ -608,6 +611,41 @@
                     const errorMessage = error.message;
                     alert('Signup failed: ' + errorMessage);
                 });
+        });
+
+        // Listen for changes in the authentication state
+        auth.onAuthStateChanged((user) => {
+            const loginButton = document.getElementById('openAuthModal');
+            const logoutButton = document.getElementById('logoutButton');
+            const cartSection = document.getElementById('cart');
+
+            if (user) {
+                // User is logged in, show logout button and hide login button
+                logoutButton.classList.remove('hidden');
+                loginButton.classList.add('hidden');
+
+                // Show the cart section
+                cartSection.classList.remove('hidden');
+            } else {
+                // No user is logged in, show login button and hide logout button
+                logoutButton.classList.add('hidden');
+                loginButton.classList.remove('hidden');
+
+                // Hide the cart section
+                cartSection.classList.add('hidden');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                // Sign-out successful.
+                alert('You have been logged out successfully!');
+            }).catch((error) => {
+                // An error happened.
+                console.error('Logout error:', error);
+                alert('An error occurred during logout: ' + error.message);
+            });
         });
 
         // Smooth scrolling for anchor links
