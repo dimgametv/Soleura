@@ -79,6 +79,9 @@
                     <button id="openAuthModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300">
                         Login/Signup
                     </button>
+                    <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">
+                        Logout
+                    </button>
                 </div>
                 <div class="flex items-center md:hidden">
                     <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
@@ -556,12 +559,14 @@
             document.getElementById('authModal').classList.add('hidden');
         });
 
-        document.getElementById('showLogin').addEventListener('click', function() {
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('signupForm').classList.add('hidden');
         });
 
-        document.getElementById('showSignup').addEventListener('click', function() {
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('signupForm').classList.remove('hidden');
         });
@@ -578,6 +583,8 @@
                     alert('Login successful!');
                     document.getElementById('authModal').classList.add('hidden');
                     document.getElementById('loginForm').reset();
+                    document.getElementById('openAuthModal').classList.add('hidden');
+                    document.getElementById('logoutButton').classList.remove('hidden');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -598,12 +605,25 @@
                     alert('Signup successful!');
                     document.getElementById('authModal').classList.add('hidden');
                     document.getElementById('signupForm').reset();
+                    document.getElementById('openAuthModal').classList.add('hidden');
+                    document.getElementById('logoutButton').classList.remove('hidden');
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     alert('Signup failed: ' + errorMessage);
                 });
+        });
+
+        // Logout Functionality
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            auth.signOut().then(() => {
+                alert('Logout successful!');
+                document.getElementById('logoutButton').classList.add('hidden');
+                document.getElementById('openAuthModal').classList.remove('hidden');
+            }).catch((error) => {
+                alert('Logout failed: ' + error.message);
+            });
         });
 
         // Smooth scrolling for anchor links
