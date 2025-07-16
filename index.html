@@ -176,7 +176,7 @@
                         <p class="text-gray-600 mb-4">Lightweight running shoes with advanced cushioning technology</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹9,749</span>
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
                                 <span class="text-gray-400 line-through mr-2">₹7,499</span>
                                 <span class="text-xl font-bold text-gray-900">₹5,999</span>
                             </div>
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                         <p class="text-gray-600 mb-4">Premium leather formal shoes for business and special occasions</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹11,999</span>
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -758,7 +758,7 @@
         }
 
         // Event listeners for "Add to Cart" buttons
-        document.querySelectorAll('.shoe-card button').forEach(button => {
+        document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
                 const card = this.closest('.shoe-card');
                 const product = {
