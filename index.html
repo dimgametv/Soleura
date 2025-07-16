@@ -79,9 +79,6 @@
                     <button id="openAuthModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300">
                         Login/Signup
                     </button>
-                    <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">
-                        Logout
-                    </button>
                 </div>
                 <div class="flex items-center md:hidden">
                     <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
@@ -100,7 +97,6 @@
             <a href="#cart" class="block px-3 py-2 text-gray-900 hover:bg-gray-100 rounded-md text-base font-medium">Cart</a>
         </div>
     </nav>
-
     <!-- Auth Modal -->
     <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
@@ -140,7 +136,6 @@
             </form>
         </div>
     </div>
-
     <!-- Hero Section -->
     <section id="home" class="hero-gradient py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
@@ -576,7 +571,6 @@
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in
@@ -597,7 +591,6 @@
             e.preventDefault();
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
-
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed up
@@ -611,41 +604,6 @@
                     const errorMessage = error.message;
                     alert('Signup failed: ' + errorMessage);
                 });
-        });
-
-        // Listen for changes in the authentication state
-        auth.onAuthStateChanged((user) => {
-            const loginButton = document.getElementById('openAuthModal');
-            const logoutButton = document.getElementById('logoutButton');
-            const cartSection = document.getElementById('cart');
-
-            if (user) {
-                // User is logged in, show logout button and hide login button
-                logoutButton.classList.remove('hidden');
-                loginButton.classList.add('hidden');
-
-                // Show the cart section
-                cartSection.classList.remove('hidden');
-            } else {
-                // No user is logged in, show login button and hide logout button
-                logoutButton.classList.add('hidden');
-                loginButton.classList.remove('hidden');
-
-                // Hide the cart section
-                cartSection.classList.add('hidden');
-            }
-        });
-
-        // Logout functionality
-        document.getElementById('logoutButton').addEventListener('click', () => {
-            auth.signOut().then(() => {
-                // Sign-out successful.
-                alert('You have been logged out successfully!');
-            }).catch((error) => {
-                // An error happened.
-                console.error('Logout error:', error);
-                alert('An error occurred during logout: ' + error.message);
-            });
         });
 
         // Smooth scrolling for anchor links
@@ -728,33 +686,46 @@
 
         // Function to add an item to the cart
         function addToCart(product) {
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            alert(`${product.name} has been added to your cart!`);
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    cart.push(product);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    alert(`${product.name} has been added to your cart!`);
+                } else {
+                    document.getElementById('authModal').classList.remove('hidden');
+                }
+            });
         }
 
         // Function to display cart items
         function displayCartItems() {
-            const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = '';
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="text-center text-gray-600">Your cart is empty.</p>';
-                return;
-            }
-            cart.forEach((item, index) => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'bg-gray-50 p-4 rounded-lg shadow-md flex justify-between items-center';
-                cartItem.innerHTML = `
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900">${item.name}</h3>
-                        <p class="text-gray-600">₹${item.price}</p>
-                    </div>
-                    <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    const cartItemsContainer = document.getElementById('cart-items');
+                    cartItemsContainer.innerHTML = '';
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = '<p class="text-center text-gray-600">Your cart is empty.</p>';
+                        return;
+                    }
+                    cart.forEach((item, index) => {
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'bg-gray-50 p-4 rounded-lg shadow-md flex justify-between items-center';
+                        cartItem.innerHTML = `
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">${item.name}</h3>
+                                <p class="text-gray-600">₹${item.price}</p>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        `;
+                        cartItemsContainer.appendChild(cartItem);
+                    });
+                } else {
+                    document.getElementById('authModal').classList.remove('hidden');
+                    document.getElementById('cart').classList.add('hidden');
+                }
             });
         }
 
@@ -782,8 +753,14 @@
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
-            document.getElementById('cart').classList.remove('hidden');
-            displayCartItems();
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    document.getElementById('cart').classList.remove('hidden');
+                    displayCartItems();
+                } else {
+                    document.getElementById('authModal').classList.remove('hidden');
+                }
+            });
         });
 
         // Event listener for the checkout button
