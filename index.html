@@ -79,6 +79,63 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .color-option.selected {
+            border: 2px solid #3b82f6;
+        }
+        .size-option {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        .size-option.selected {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
     </style>
 </head>
 <body class="bg-gray-50" oncontextmenu="return false" onkeydown="return disableF12(event)">
@@ -201,7 +258,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Product 1 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('AeroRun Pro', 'Lightweight running shoes with advanced cushioning technology', '₹9,749', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
@@ -216,7 +273,7 @@
                     </div>
                 </div>
                 <!-- Product 2 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Urban Classic', 'Versatile casual shoes perfect for everyday wear', '₹5,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
@@ -234,7 +291,7 @@
                     </div>
                 </div>
                 <!-- Product 3 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Executive Oxford', 'Premium leather formal shoes for business and special occasions', '₹11,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
@@ -250,7 +307,7 @@
                 </div>
                 <!-- Additional Products (initially hidden) -->
                 <!-- Product 4 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('AeroRun Pro', 'Lightweight running shoes with advanced cushioning technology', '₹9,749', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
@@ -265,7 +322,7 @@
                     </div>
                 </div>
                 <!-- Product 5 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('Urban Classic', 'Versatile casual shoes perfect for everyday wear', '₹5,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
@@ -283,7 +340,7 @@
                     </div>
                 </div>
                 <!-- Product 6 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('Executive Oxford', 'Premium leather formal shoes for business and special occasions', '₹11,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
@@ -298,7 +355,7 @@
                     </div>
                 </div>
                 <!-- Product 7 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('AeroRun Pro', 'Lightweight running shoes with advanced cushioning technology', '₹9,749', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
@@ -313,7 +370,7 @@
                     </div>
                 </div>
                 <!-- Product 8 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('Urban Classic', 'Versatile casual shoes perfect for everyday wear', '₹5,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
@@ -331,7 +388,7 @@
                     </div>
                 </div>
                 <!-- Product 9 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden cursor-pointer" onclick="openShoeModal('Executive Oxford', 'Premium leather formal shoes for business and special occasions', '₹11,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
@@ -351,6 +408,43 @@
             </div>
         </div>
     </section>
+    <!-- Shoe Modal -->
+    <div id="shoeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeShoeModal()">&times;</span>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2">
+                    <img id="modal-shoe-image" src="" alt="Shoe Image" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="md:w-1/2 md:pl-6">
+                    <h2 id="modal-shoe-name" class="text-2xl font-bold text-gray-900 mb-2"></h2>
+                    <p id="modal-shoe-description" class="text-gray-600 mb-4"></p>
+                    <p id="modal-shoe-price" class="text-xl font-bold text-gray-900 mb-4"></p>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Color Options</h3>
+                        <div class="flex">
+                            <div class="color-option bg-black selected" onclick="selectColor(this)"></div>
+                            <div class="color-option bg-gray-500" onclick="selectColor(this)"></div>
+                            <div class="color-option bg-red-500" onclick="selectColor(this)"></div>
+                            <div class="color-option bg-blue-500" onclick="selectColor(this)"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Size Options</h3>
+                        <div class="flex flex-wrap">
+                            <div class="size-option" onclick="selectSize(this)">6</div>
+                            <div class="size-option" onclick="selectSize(this)">7</div>
+                            <div class="size-option" onclick="selectSize(this)">8</div>
+                            <div class="size-option" onclick="selectSize(this)">9</div>
+                            <div class="size-option" onclick="selectSize(this)">10</div>
+                            <div class="size-option" onclick="selectSize(this)">11</div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- About Section -->
     <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-7xl mx-auto">
@@ -586,7 +680,6 @@
             }
             return true;
         }
-
         // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCc0UnhorJ-5zmSPR__ebUzAnely3t-tG8",
@@ -816,6 +909,45 @@
         });
         // Initialize cart count on page load
         updateCartCount();
+        // Shoe Modal Functions
+        function openShoeModal(name, description, price, image) {
+            const modal = document.getElementById('shoeModal');
+            const modalName = document.getElementById('modal-shoe-name');
+            const modalDescription = document.getElementById('modal-shoe-description');
+            const modalPrice = document.getElementById('modal-shoe-price');
+            const modalImage = document.getElementById('modal-shoe-image');
+
+            modalName.textContent = name;
+            modalDescription.textContent = description;
+            modalPrice.textContent = price;
+            modalImage.src = image;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeShoeModal() {
+            document.getElementById('shoeModal').classList.add('hidden');
+        }
+
+        function selectColor(element) {
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach(option => option.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function selectSize(element) {
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => option.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // Close modal when clicking outside of the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('shoeModal');
+            if (event.target === modal) {
+                closeShoeModal();
+            }
+        }
     </script>
 </body>
 </html>
