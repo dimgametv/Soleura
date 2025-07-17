@@ -6,28 +6,10 @@
     <title>Product Details - EliteSteps</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-        }
-        .swiper-container {
-            width: 100%;
-            height: auto; /* Adjust height as needed */
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            max-width: 100%;
-            max-height: 300px; /* Adjust height as needed */
-            object-fit: contain;
         }
     </style>
 </head>
@@ -78,17 +60,10 @@
     <section class="py-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Product Images Slider -->
+                <!-- Product Image -->
                 <div class="lg:w-1/2">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper" id="product-images">
-                            <!-- Product images will be added here dynamically -->
-                        </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Navigation buttons -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <img id="product-image" src="" alt="Product Image" class="w-full h-auto object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Product Details -->
@@ -190,43 +165,21 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-        // Initialize Swiper
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
         // Get product details from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const product = {
             name: urlParams.get('name'),
             description: urlParams.get('description'),
             price: urlParams.get('price'),
-            images: JSON.parse(urlParams.get('images'))
+            image: urlParams.get('images') ? JSON.parse(urlParams.get('images'))[0] : ''
         };
 
         // Display product details
         document.getElementById('product-name').textContent = product.name;
         document.getElementById('product-description').textContent = product.description;
         document.getElementById('product-price').textContent = `₹${product.price}`;
-
-        // Display product images
-        const productImagesContainer = document.getElementById('product-images');
-        product.images.forEach(image => {
-            const slide = document.createElement('div');
-            slide.className = 'swiper-slide';
-            slide.innerHTML = `<img src="${image}" alt="${product.name}">`;
-            productImagesContainer.appendChild(slide);
-        });
+        document.getElementById('product-image').src = product.image;
 
         // Add to cart functionality
         document.getElementById('add-to-cart').addEventListener('click', function() {
