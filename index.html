@@ -286,7 +286,7 @@
                         <p class="text-gray-600 mb-4">Lightweight running shoes with advanced cushioning technology</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹9,749</span>
-                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button onclick="event.stopPropagation(); addToCartFromCard(this)" class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@
                                 <span class="text-gray-400 line-through mr-2">₹7,499</span>
                                 <span class="text-xl font-bold text-gray-900">₹5,999</span>
                             </div>
-                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button onclick="event.stopPropagation(); addToCartFromCard(this)" class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -319,7 +319,7 @@
                         <p class="text-gray-600 mb-4">Premium leather formal shoes for business and special occasions</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹11,999</span>
-                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                            <button onclick="event.stopPropagation(); addToCartFromCard(this)" class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -356,7 +356,7 @@
                             <div class="size-option" onclick="selectSize(this)">10</div>
                         </div>
                     </div>
-                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                    <button onclick="addModalProductToCart()" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -779,6 +779,31 @@
                 }
             });
         }
+        // Function to add an item to the cart from the card
+        function addToCartFromCard(button) {
+            const card = button.closest('.shoe-card');
+            const product = {
+                name: card.querySelector('h3').textContent,
+                price: card.querySelector('.text-xl.font-bold.text-gray-900').textContent.replace('₹', ''),
+                image: card.querySelector('img').src
+            };
+            addToCart(product);
+        }
+        // Function to add an item to the cart from the modal
+        function addModalProductToCart() {
+            const name = document.getElementById('modal-shoe-name').textContent;
+            const price = document.getElementById('modal-shoe-price').textContent;
+            const image = document.getElementById('modal-shoe-image').src;
+
+            const product = {
+                name: name,
+                price: price.replace('₹', ''),
+                image: image
+            };
+
+            addToCart(product);
+            closeShoeModal(); // Close the modal after adding to cart
+        }
         // Function to display cart items
         function displayCartItems() {
             auth.onAuthStateChanged((user) => {
@@ -816,18 +841,6 @@
             updateCartCount();
             displayCartItems();
         }
-        // Event listeners for "Add to Cart" buttons
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const card = this.closest('.shoe-card');
-                const product = {
-                    name: card.querySelector('h3').textContent,
-                    price: card.querySelector('.text-xl.font-bold.text-gray-900').textContent.replace('₹', ''),
-                    image: card.querySelector('img').src
-                };
-                addToCart(product);
-            });
-        });
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
