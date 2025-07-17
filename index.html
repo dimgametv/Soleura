@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>EliteSteps - Premium Footwear Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -81,7 +81,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50" oncontextmenu="return false" onkeydown="return disableF12(event)">
     <!-- Navigation -->
     <nav class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -578,6 +578,15 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
+        // Disable F12 key
+        function disableF12(event) {
+            if (event.key === 'F12') {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+
         // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCc0UnhorJ-5zmSPR__ebUzAnely3t-tG8",
