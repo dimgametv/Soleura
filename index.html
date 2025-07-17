@@ -79,57 +79,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        /* Modal Styles */
-        .shoe-gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .gallery-thumbnail {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .gallery-thumbnail:hover, .gallery-thumbnail.active {
-            border-color: #3b82f6;
-        }
-        .main-image {
-            transition: opacity 0.5s ease;
-        }
-        .fade-in {
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .size-option {
-            transition: all 0.2s ease;
-        }
-        .size-option:hover, .size-option.selected {
-            background-color: #3b82f6;
-            color: white;
-        }
-        .color-option {
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
-        }
-        .color-option:hover, .color-option.selected {
-            border-color: #3b82f6;
-            transform: scale(1.1);
-        }
-        .cart-notification {
-            animation: slideIn 0.5s forwards, slideOut 0.5s forwards 2.5s;
-        }
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
     </style>
 </head>
 <body class="bg-gray-50" oncontextmenu="return false" onkeydown="return disableF12(event)">
@@ -252,7 +201,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Product 1 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 product-card" data-id="1">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
@@ -267,7 +216,7 @@
                     </div>
                 </div>
                 <!-- Product 2 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 product-card" data-id="2">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
@@ -285,7 +234,104 @@
                     </div>
                 </div>
                 <!-- Product 3 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 product-card" data-id="3">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Executive Oxford</h3>
+                        <p class="text-gray-600 mb-4">Premium leather formal shoes for business and special occasions</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-gray-900">₹11,999</span>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Products (initially hidden) -->
+                <!-- Product 4 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">AeroRun Pro</h3>
+                        <p class="text-gray-600 mb-4">Lightweight running shoes with advanced cushioning technology</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-gray-900">₹9,749</span>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Urban Classic</h3>
+                        <p class="text-gray-600 mb-4">Versatile casual shoes perfect for everyday wear</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-400 line-through mr-2">₹7,499</span>
+                                <span class="text-xl font-bold text-gray-900">₹5,999</span>
+                            </div>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 6 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Executive Oxford</h3>
+                        <p class="text-gray-600 mb-4">Premium leather formal shoes for business and special occasions</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-gray-900">₹11,999</span>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 7 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">AeroRun Pro</h3>
+                        <p class="text-gray-600 mb-4">Lightweight running shoes with advanced cushioning technology</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-gray-900">₹9,749</span>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 8 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Urban Classic</h3>
+                        <p class="text-gray-600 mb-4">Versatile casual shoes perfect for everyday wear</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-400 line-through mr-2">₹7,499</span>
+                                <span class="text-xl font-bold text-gray-900">₹5,999</span>
+                            </div>
+                            <button class="add-to-cart bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 9 -->
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 additional-product hidden">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
@@ -305,107 +351,6 @@
             </div>
         </div>
     </section>
-    <!-- Product Detail Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-y-auto">
-        <div class="container mx-auto p-4 max-w-6xl">
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-                <div class="relative">
-                    <button id="close-modal" class="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100">
-                        <i class="fas fa-times text-gray-700"></i>
-                    </button>
-                    <div class="flex flex-col md:flex-row">
-                        <!-- Product Images -->
-                        <div class="w-full md:w-1/2 p-6">
-                            <div class="relative">
-                                <img id="main-image" src="" alt="Product" class="w-full h-96 object-contain main-image fade-in">
-                                <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                                    <button id="prev-image" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100">
-                                        <i class="fas fa-chevron-left text-gray-700"></i>
-                                    </button>
-                                    <button id="next-image" class="bg-white rounded-full p-2 shadow-md hover:bg-gray-100">
-                                        <i class="fas fa-chevron-right text-gray-700"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="thumbnail-gallery" class="shoe-gallery mt-4">
-                                <!-- Thumbnails will be added by JavaScript -->
-                            </div>
-                        </div>
-
-                        <!-- Product Info -->
-                        <div class="w-full md:w-1/2 p-6">
-                            <h2 id="product-title" class="text-2xl font-bold mb-2"></h2>
-                            <p id="product-category" class="text-gray-600 mb-4"></p>
-                            <div class="flex items-center mb-4">
-                                <div class="flex text-yellow-400 mr-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-gray-600">(42 reviews)</span>
-                            </div>
-                            <p id="product-price" class="text-3xl font-bold text-gray-800 mb-6"></p>
-
-                            <!-- Color Selection -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Color</h3>
-                                <div id="color-options" class="flex space-x-3">
-                                    <!-- Color options will be added by JavaScript -->
-                                </div>
-                            </div>
-
-                            <!-- Size Selection -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Size</h3>
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm text-gray-600">Select Size</span>
-                                    <a href="#" class="text-sm text-blue-600 hover:underline">Size Guide</a>
-                                </div>
-                                <div id="size-options" class="grid grid-cols-4 gap-2">
-                                    <!-- Size options will be added by JavaScript -->
-                                </div>
-                            </div>
-
-                            <!-- Quantity -->
-                            <div class="mb-6">
-                                <h3 class="font-semibold mb-3">Quantity</h3>
-                                <div class="flex items-center">
-                                    <button id="decrease-qty" class="bg-gray-200 px-3 py-1 rounded-l hover:bg-gray-300">-</button>
-                                    <input id="quantity" type="number" value="1" min="1" class="w-16 text-center border-t border-b border-gray-300 py-1">
-                                    <button id="increase-qty" class="bg-gray-200 px-3 py-1 rounded-r hover:bg-gray-300">+</button>
-                                </div>
-                            </div>
-
-                            <!-- Add to Cart Button -->
-                            <div class="flex space-x-4">
-                                <button id="add-to-cart" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex-1">
-                                    Add to Cart
-                                </button>
-                                <button class="bg-gray-200 text-gray-800 px-4 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Product Details -->
-                            <div class="mt-8">
-                                <h3 class="font-semibold mb-3">Product Details</h3>
-                                <div id="product-details" class="text-gray-700 space-y-2">
-                                    <!-- Details will be added by JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Cart Notification -->
-    <div id="cart-notification" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden items-center">
-        <i class="fas fa-check-circle mr-2"></i>
-        <span>Item added to cart!</span>
-    </div>
     <!-- About Section -->
     <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-7xl mx-auto">
@@ -641,6 +586,7 @@
             }
             return true;
         }
+
         // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCc0UnhorJ-5zmSPR__ebUzAnely3t-tG8",
@@ -870,294 +816,6 @@
         });
         // Initialize cart count on page load
         updateCartCount();
-
-        // Product Data
-        const products = {
-            1: {
-                title: "AeroRun Pro",
-                category: "Lightweight running shoes with advanced cushioning technology",
-                price: "₹9,749",
-                colors: ["Blue", "Black", "Red"],
-                colorCodes: ["#3b82f6", "#000000", "#ef4444"],
-                sizes: [7, 8, 9, 10, 11, 12],
-                images: [
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                ],
-                details: [
-                    "The AeroRun Pro delivers a fresh take on lightweight running shoes with its advanced cushioning technology.",
-                    "Breathable mesh upper for all-day comfort.",
-                    "Foam midsole for lightweight cushioning.",
-                    "Rubber outsole for durable traction.",
-                    "Inspired by running icons, the AeroRun Pro delivers visible air for the first time under your heel."
-                ]
-            },
-            2: {
-                title: "Urban Classic",
-                category: "Versatile casual shoes perfect for everyday wear",
-                price: "₹5,999",
-                originalPrice: "₹7,499",
-                colors: ["White", "Black"],
-                colorCodes: ["#ffffff", "#000000"],
-                sizes: [7, 8, 9, 10, 11, 12, 13],
-                images: [
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                ],
-                details: [
-                    "Inspired by the original casual shoes, this edition maintains the iconic look you love while choice colors and crisp leather give it a distinct identity.",
-                    "Leather upper for durability and a premium look.",
-                    "Air-Sole unit in the heel for lightweight cushioning.",
-                    "Classic design with a high-top collar for ankle support.",
-                    "Rubber outsole for durable traction."
-                ]
-            },
-            3: {
-                title: "Executive Oxford",
-                category: "Premium leather formal shoes for business and special occasions",
-                price: "₹11,999",
-                colors: ["White", "Pink"],
-                colorCodes: ["#ffffff", "#fbcfe8"],
-                sizes: [5, 6, 7, 8, 9, 10],
-                images: [
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                ],
-                details: [
-                    "The radiance lives on in the Executive Oxford, a modern take on the iconic formal shoes that blends classic style with fresh details.",
-                    "Leather upper for durability and a premium look.",
-                    "Perforations on the toe for breathability.",
-                    "Encapsulated Air-Sole unit for lightweight cushioning.",
-                    "Rubber outsole for durable traction."
-                ]
-            }
-        };
-
-        // Cart functionality
-        let currentProductId = null;
-        let currentImageIndex = 0;
-        let selectedColor = null;
-        let selectedSize = null;
-
-        // DOM Elements
-        const productModal = document.getElementById('product-modal');
-        const closeModal = document.getElementById('close-modal');
-        const mainImage = document.getElementById('main-image');
-        const thumbnailGallery = document.getElementById('thumbnail-gallery');
-        const productTitle = document.getElementById('product-title');
-        const productCategory = document.getElementById('product-category');
-        const productPrice = document.getElementById('product-price');
-        const colorOptions = document.getElementById('color-options');
-        const sizeOptions = document.getElementById('size-options');
-        const productDetails = document.getElementById('product-details');
-        const prevImage = document.getElementById('prev-image');
-        const nextImage = document.getElementById('next-image');
-        const decreaseQty = document.getElementById('decrease-qty');
-        const increaseQty = document.getElementById('increase-qty');
-        const quantityInput = document.getElementById('quantity');
-        const addToCart = document.getElementById('add-to-cart');
-        const cartNotification = document.getElementById('cart-notification');
-
-        // Event Listeners
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('.add-to-cart')) {
-                    openProductModal(card.dataset.id);
-                }
-            });
-        });
-
-        closeModal.addEventListener('click', closeProductModal);
-        prevImage.addEventListener('click', showPreviousImage);
-        nextImage.addEventListener('click', showNextImage);
-        decreaseQty.addEventListener('click', decreaseQuantity);
-        increaseQty.addEventListener('click', increaseQuantity);
-        addToCart.addEventListener('click', addProductToCart);
-
-        // Functions
-        function openProductModal(productId) {
-            currentProductId = productId;
-            const product = products[productId];
-
-            // Set basic product info
-            productTitle.textContent = product.title;
-            productCategory.textContent = product.category;
-            productPrice.textContent = product.price;
-            if (product.originalPrice) {
-                productPrice.innerHTML += ` <span class="text-lg text-gray-500 line-through">${product.originalPrice}</span>`;
-            }
-
-            // Set product images
-            currentImageIndex = 0;
-            mainImage.src = product.images[0];
-            mainImage.alt = product.title;
-
-            // Create thumbnails
-            thumbnailGallery.innerHTML = '';
-            product.images.forEach((image, index) => {
-                const thumbnail = document.createElement('img');
-                thumbnail.src = image;
-                thumbnail.alt = `${product.title} thumbnail ${index + 1}`;
-                thumbnail.className = 'gallery-thumbnail h-20 object-cover rounded cursor-pointer';
-                if (index === 0) thumbnail.classList.add('active');
-                thumbnail.addEventListener('click', () => changeMainImage(index));
-                thumbnailGallery.appendChild(thumbnail);
-            });
-
-            // Create color options
-            colorOptions.innerHTML = '';
-            product.colors.forEach((color, index) => {
-                const colorOption = document.createElement('div');
-                colorOption.className = 'color-option w-10 h-10 rounded-full cursor-pointer';
-                colorOption.style.backgroundColor = product.colorCodes[index];
-                colorOption.title = color;
-                if (index === 0) {
-                    colorOption.classList.add('selected');
-                    selectedColor = color;
-                }
-                colorOption.addEventListener('click', () => selectColor(color, index));
-                colorOptions.appendChild(colorOption);
-            });
-
-            // Create size options
-            sizeOptions.innerHTML = '';
-            product.sizes.forEach(size => {
-                const sizeOption = document.createElement('div');
-                sizeOption.className = 'size-option border border-gray-300 rounded text-center py-2 cursor-pointer';
-                sizeOption.textContent = size;
-                sizeOption.addEventListener('click', () => selectSize(size));
-                sizeOptions.appendChild(sizeOption);
-            });
-
-            // Set product details
-            productDetails.innerHTML = '';
-            product.details.forEach(detail => {
-                const detailItem = document.createElement('p');
-                detailItem.className = 'text-sm';
-                detailItem.textContent = detail;
-                productDetails.appendChild(detailItem);
-            });
-
-            // Show modal
-            productModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeProductModal() {
-            productModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function changeMainImage(index) {
-            currentImageIndex = index;
-            mainImage.classList.remove('fade-in');
-            void mainImage.offsetWidth; // Trigger reflow
-            mainImage.classList.add('fade-in');
-            mainImage.src = products[currentProductId].images[index];
-
-            // Update active thumbnail
-            document.querySelectorAll('.gallery-thumbnail').forEach((thumb, i) => {
-                if (i === index) {
-                    thumb.classList.add('active');
-                } else {
-                    thumb.classList.remove('active');
-                }
-            });
-        }
-
-        function showPreviousImage() {
-            const product = products[currentProductId];
-            const newIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
-            changeMainImage(newIndex);
-        }
-
-        function showNextImage() {
-            const product = products[currentProductId];
-            const newIndex = (currentImageIndex + 1) % product.images.length;
-            changeMainImage(newIndex);
-        }
-
-        function selectColor(color, index) {
-            selectedColor = color;
-            document.querySelectorAll('.color-option').forEach((option, i) => {
-                if (i === index) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-
-        function selectSize(size) {
-            selectedSize = size;
-            document.querySelectorAll('.size-option').forEach(option => {
-                if (option.textContent == size) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-
-        function decreaseQuantity() {
-            let qty = parseInt(quantityInput.value);
-            if (qty > 1) {
-                quantityInput.value = qty - 1;
-            }
-        }
-
-        function increaseQuantity() {
-            let qty = parseInt(quantityInput.value);
-            quantityInput.value = qty + 1;
-        }
-
-        function addProductToCart() {
-            if (!selectedSize) {
-                alert('Please select a size');
-                return;
-            }
-
-            const product = products[currentProductId];
-            const quantity = parseInt(quantityInput.value);
-
-            // Add to cart
-            cart.push({
-                id: currentProductId,
-                title: product.title,
-                price: product.price,
-                color: selectedColor,
-                size: selectedSize,
-                quantity: quantity,
-                image: product.images[0]
-            });
-
-            // Update cart count
-            updateCartCount();
-
-            // Show notification
-            cartNotification.classList.remove('hidden');
-            setTimeout(() => {
-                cartNotification.classList.add('hidden');
-            }, 3000);
-
-            // Close modal after a delay
-            setTimeout(() => {
-                closeProductModal();
-            }, 1000);
-        }
-
-        // Close modal when clicking outside
-        productModal.addEventListener('click', (e) => {
-            if (e.target === productModal) {
-                closeProductModal();
-            }
-        });
     </script>
 </body>
 </html>
