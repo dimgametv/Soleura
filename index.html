@@ -1021,7 +1021,34 @@
             console.error('User is not authenticated');
         }
     });
-}
+    }
+        auth.onAuthStateChanged((user) => {
+    if (user) {
+        // User is signed in
+        document.getElementById('openAuthModal').classList.add('hidden');
+        document.getElementById('logoutButton').classList.remove('hidden');
+
+        // Load cart from Firebase
+        const userId = user.uid;
+        const cartRef = database.ref('carts/' + userId);
+        cartRef.once('value')
+            .then((snapshot) => {
+                const savedCart = snapshot.val();
+                if (savedCart) {
+                    cart = savedCart;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                }
+            })
+            .catch((error) => {
+                console.error('Error loading cart from Firebase: ', error);
+            });
+    } else {
+        // User is signed out
+        document.getElementById('openAuthModal').classList.remove('hidden');
+        document.getElementById('logoutButton').classList.add('hidden');
+    }
+});
 
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
