@@ -276,7 +276,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Product 1 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('AeroRun Pro', 'Lightweight running shoes with advanced cushioning technology', '₹9,749', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('AeroRun Pro', 'Lightweight running shoes with advanced cushioning technology', '₹9,749', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', 4.5, 42)">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Running Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">NEW</div>
@@ -291,7 +291,7 @@
                     </div>
                 </div>
                 <!-- Product 2 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Urban Classic', 'Versatile casual shoes perfect for everyday wear', '₹5,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Urban Classic', 'Versatile casual shoes perfect for everyday wear', '₹5,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', 3.8, 32)">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Casual Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">SALE</div>
@@ -309,7 +309,7 @@
                     </div>
                 </div>
                 <!-- Product 3 -->
-                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Executive Oxford', 'Premium leather formal shoes for business and special occasions', '₹11,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')">
+                <div class="shoe-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 cursor-pointer" onclick="openShoeModal('Executive Oxford', 'Premium leather formal shoes for business and special occasions', '₹11,999', 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', 4.7, 56)">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Formal Shoes" class="w-full h-64 object-cover">
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">BESTSELLER</div>
@@ -334,8 +334,17 @@
                     <img id="modal-shoe-image" src="" alt="Shoe Image" class="w-full h-auto rounded-lg">
                 </div>
                 <div class="md:w-1/2 md:pl-6">
-                    <h2 id="modal-shoe-name" class="text-2xl font-bold text-gray-900 mb-2"></h2>
-                    <p id="modal-shoe-description" class="text-gray-600 mb-4"></p>
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 id="modal-shoe-name" class="text-2xl font-bold text-gray-900"></h2>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span id="modal-shoe-rating" class="ml-1 text-gray-700">0</span>
+                            <span class="text-gray-500 ml-1">(<span id="modal-shoe-reviews">0</span> reviews)</span>
+                        </div>
+                    </div>
+                    <div class="text-gray-600 mb-4">
+                        <p id="modal-shoe-description" class="mb-2"></p>
+                    </div>
                     <p id="modal-shoe-price" class="text-xl font-bold text-gray-900 mb-4"></p>
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold text-gray-900 mb-2">Color Options</h3>
@@ -354,6 +363,14 @@
                             <div class="size-option" onclick="selectSize(this)">8</div>
                             <div class="size-option" onclick="selectSize(this)">9</div>
                             <div class="size-option" onclick="selectSize(this)">10</div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Quantity</h3>
+                        <div class="flex items-center">
+                            <button type="button" onclick="decreaseQuantity()" class="bg-gray-200 px-3 py-1 rounded-l">-</button>
+                            <input type="text" id="quantity" value="1" readonly class="w-12 text-center border-t border-b border-gray-200">
+                            <button type="button" onclick="increaseQuantity()" class="bg-gray-200 px-3 py-1 rounded-r">+</button>
                         </div>
                     </div>
                     <button onclick="addModalProductToCart()" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">Add to Cart</button>
@@ -512,10 +529,10 @@
                 <input
                     type="email"
                     placeholder="Your email address"
-                    class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-900"
+                    class="flex-grow px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-900"
                     required
                 >
-                <button type="submit" class="bg-white text-blue-500 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition duration-300">Subscribe</button>
+                <button type="submit" class="bg-white text-blue-500 hover:bg-gray-100 px-6 py-2 rounded-lg font-medium transition duration-300">Subscribe</button>
             </form>
             <p class="text-blue-100 text-sm mt-4">We respect your privacy. Unsubscribe at any time.</p>
         </div>
@@ -727,31 +744,55 @@
             });
         }
         // Shoe Modal Functions
-        function openShoeModal(name, description, price, image) {
+        function openShoeModal(name, description, price, image, rating, reviews) {
             const modal = document.getElementById('shoeModal');
             const modalName = document.getElementById('modal-shoe-name');
             const modalDescription = document.getElementById('modal-shoe-description');
             const modalPrice = document.getElementById('modal-shoe-price');
             const modalImage = document.getElementById('modal-shoe-image');
+            const modalRating = document.getElementById('modal-shoe-rating');
+            const modalReviews = document.getElementById('modal-shoe-reviews');
+
             modalName.textContent = name;
             modalDescription.textContent = description;
             modalPrice.textContent = price;
             modalImage.src = image;
+            modalRating.textContent = rating;
+            modalReviews.textContent = reviews;
+
             modal.style.display = 'block';
         }
+
         function closeShoeModal() {
             document.getElementById('shoeModal').style.display = 'none';
         }
+
         function selectColor(element) {
             const colorOptions = document.querySelectorAll('.color-option');
             colorOptions.forEach(option => option.classList.remove('selected'));
             element.classList.add('selected');
         }
+
         function selectSize(element) {
             const sizeOptions = document.querySelectorAll('.size-option');
             sizeOptions.forEach(option => option.classList.remove('selected'));
             element.classList.add('selected');
         }
+
+        function decreaseQuantity() {
+            let quantityInput = document.getElementById('quantity');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            let quantityInput = document.getElementById('quantity');
+            let quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+        }
+
         // Close modal when clicking outside of the modal content
         window.onclick = function(event) {
             const modal = document.getElementById('shoeModal');
@@ -759,13 +800,16 @@
                 closeShoeModal();
             }
         }
+
         // Cart functionality
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
         // Function to update the cart count in the navigation bar
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
             cartCount.textContent = cart.length;
         }
+
         // Function to add an item to the cart
         function addToCart(product) {
             auth.onAuthStateChanged((user) => {
@@ -779,6 +823,7 @@
                 }
             });
         }
+
         // Function to add an item to the cart from the card
         function addToCartFromCard(button) {
             const card = button.closest('.shoe-card');
@@ -789,21 +834,21 @@
             };
             addToCart(product);
         }
+
         // Function to add an item to the cart from the modal
         function addModalProductToCart() {
             const name = document.getElementById('modal-shoe-name').textContent;
             const price = document.getElementById('modal-shoe-price').textContent;
             const image = document.getElementById('modal-shoe-image').src;
-
             const product = {
                 name: name,
                 price: price.replace('₹', ''),
                 image: image
             };
-
             addToCart(product);
             closeShoeModal(); // Close the modal after adding to cart
         }
+
         // Function to display cart items
         function displayCartItems() {
             auth.onAuthStateChanged((user) => {
@@ -834,6 +879,7 @@
                 }
             });
         }
+
         // Function to remove an item from the cart
         function removeFromCart(index) {
             cart.splice(index, 1);
@@ -841,6 +887,7 @@
             updateCartCount();
             displayCartItems();
         }
+
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
@@ -853,11 +900,13 @@
                 }
             });
         });
+
         // Event listener for the checkout button
         document.getElementById('checkout-button').addEventListener('click', function() {
             alert('Proceeding to checkout...');
             // You can add more functionality here, like redirecting to a checkout page
         });
+
         // Initialize cart count on page load
         updateCartCount();
     </script>
