@@ -1000,11 +1000,29 @@
         }
         // Function to remove an item from the cart
         function removeFromCart(index) {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             displayCartItems();
+
+            // Save the updated cart to Firebase
+            const userId = user.uid;
+            const cartRef = database.ref('carts/' + userId);
+            cartRef.set(cart)
+                .then(() => {
+                    console.log('Cart updated in Firebase');
+                })
+                .catch((error) => {
+                    console.error('Error updating cart in Firebase: ', error);
+                });
+        } else {
+            console.error('User is not authenticated');
         }
+    });
+}
+
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
