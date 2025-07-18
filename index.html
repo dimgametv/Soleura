@@ -706,7 +706,6 @@
             }
             return true;
         }
-
         // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCc0UnhorJ-5zmSPR__ebUzAnely3t-tG8",
@@ -717,27 +716,22 @@
             messagingSenderId: "439952515541",
             appId: "1:439952515541:web:f48ff9a5d3d8b35e845d5c"
         };
-
         // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const database = firebase.database();
-
         // Mobile menu toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-
         // Auth Modal
         document.getElementById('openAuthModal').addEventListener('click', function() {
             document.getElementById('authModal').classList.remove('hidden');
         });
-
         document.getElementById('closeAuthModal').addEventListener('click', function() {
             document.getElementById('authModal').classList.add('hidden');
         });
-
         // Tab Switching Logic
         document.getElementById('showLogin').addEventListener('click', function(e) {
             e.preventDefault();
@@ -746,7 +740,6 @@
             this.classList.add('active');
             document.getElementById('showSignup').classList.remove('active');
         });
-
         document.getElementById('showSignup').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('loginForm').classList.add('hidden');
@@ -754,7 +747,6 @@
             this.classList.add('active');
             document.getElementById('showLogin').classList.remove('active');
         });
-
         // Login Form Submission
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -769,7 +761,6 @@
                     document.getElementById('loginForm').reset();
                     document.getElementById('openAuthModal').classList.add('hidden');
                     document.getElementById('logoutButton').classList.remove('hidden');
-
                     // Load cart from Firebase
                     const userId = user.uid;
                     const cartRef = database.ref('carts/' + userId);
@@ -792,7 +783,6 @@
                     alert('Login failed: ' + errorMessage);
                 });
         });
-
         // Signup Form Submission
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -819,7 +809,6 @@
                     alert('Signup failed: ' + errorMessage);
                 });
         });
-
         // Logout Functionality
         document.getElementById('logoutButton').addEventListener('click', function() {
             auth.signOut().then(() => {
@@ -831,7 +820,6 @@
                 alert('Logout failed: ' + error.message);
             });
         });
-
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -850,7 +838,6 @@
                 }
             });
         });
-
         // Simple form validation for newsletter
         const newsletterForm = document.querySelector('section.bg-blue-500 form');
         if (newsletterForm) {
@@ -865,7 +852,6 @@
                 }
             });
         }
-
         // Shoe Modal Functions
         function openShoeModal(name, description, price, image, rating) {
             const modal = document.getElementById('shoeModal');
@@ -881,23 +867,33 @@
             modalRating.textContent = rating;
             modal.style.display = 'block';
         }
-
         function closeShoeModal() {
             document.getElementById('shoeModal').style.display = 'none';
+            resetModalOptions();
         }
-
+        function resetModalOptions() {
+            // Reset color options
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach(option => option.classList.remove('selected'));
+            if (colorOptions.length > 0) {
+                colorOptions[0].classList.add('selected');
+            }
+            // Reset size options
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => option.classList.remove('selected'));
+            // Reset quantity
+            document.getElementById('quantity').value = 1;
+        }
         function selectColor(element) {
             const colorOptions = document.querySelectorAll('.color-option');
             colorOptions.forEach(option => option.classList.remove('selected'));
             element.classList.add('selected');
         }
-
         function selectSize(element) {
             const sizeOptions = document.querySelectorAll('.size-option');
             sizeOptions.forEach(option => option.classList.remove('selected'));
             element.classList.add('selected');
         }
-
         function decreaseQuantity() {
             let quantityInput = document.getElementById('quantity');
             let quantity = parseInt(quantityInput.value);
@@ -905,7 +901,6 @@
                 quantityInput.value = quantity - 1;
             }
         }
-
         function increaseQuantity() {
             let quantityInput = document.getElementById('quantity');
             let quantity = parseInt(quantityInput.value);
@@ -913,7 +908,6 @@
                 quantityInput.value = quantity + 1;
             }
         }
-
         // Close modal when clicking outside of the modal content
         window.onclick = function(event) {
             const modal = document.getElementById('shoeModal');
@@ -921,16 +915,13 @@
                 closeShoeModal();
             }
         }
-
         // Cart functionality
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
         // Function to update the cart count in the navigation bar
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
             cartCount.textContent = cart.length;
         }
-
         // Function to add an item to the cart
         function addToCart(product) {
             auth.onAuthStateChanged((user) => {
@@ -954,7 +945,6 @@
                 }
             });
         }
-
         // Function to add an item to the cart from the card
         function addToCartFromCard(button) {
             const card = button.closest('.shoe-card');
@@ -965,7 +955,6 @@
             };
             addToCart(product);
         }
-
         // Function to add an item to the cart from the modal
         function addModalProductToCart() {
             const name = document.getElementById('modal-shoe-name').textContent;
@@ -979,7 +968,6 @@
             addToCart(product);
             closeShoeModal(); // Close the modal after adding to cart
         }
-
         // Function to display cart items
         function displayCartItems() {
             auth.onAuthStateChanged((user) => {
@@ -1010,7 +998,6 @@
                 }
             });
         }
-
         // Function to remove an item from the cart
         function removeFromCart(index) {
             cart.splice(index, 1);
@@ -1018,7 +1005,6 @@
             updateCartCount();
             displayCartItems();
         }
-
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
@@ -1031,16 +1017,13 @@
                 }
             });
         });
-
         // Event listener for the checkout button
         document.getElementById('checkout-button').addEventListener('click', function() {
             alert('Proceeding to checkout...');
             // You can add more functionality here, like redirecting to a checkout page
         });
-
         // Initialize cart count on page load
         updateCartCount();
-
         // View All Products functionality
         document.getElementById('view-all-products').addEventListener('click', function() {
             const additionalProducts = document.querySelectorAll('.additional-product');
