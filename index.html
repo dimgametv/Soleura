@@ -286,7 +286,7 @@
                         <p class="text-gray-600 mb-4">Lightweight running shoes with advanced cushioning technology</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹9,749</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'AeroRun Pro')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -306,7 +306,7 @@
                                 <span class="text-gray-400 line-through mr-2">₹7,499</span>
                                 <span class="text-xl font-bold text-gray-900">₹5,999</span>
                             </div>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Urban Classic')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -323,7 +323,7 @@
                         <p class="text-gray-600 mb-4">Premium leather formal shoes for business and special occasions</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹11,999</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Executive Oxford')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -341,7 +341,7 @@
                         <p class="text-gray-600 mb-4">Durable hiking shoes with excellent grip and ankle support</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹10,499</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'TrailBlazer Hike')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -358,7 +358,7 @@
                         <p class="text-gray-600 mb-4">Easy slip-on shoes with memory foam insole</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹4,299</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Comfort Slip-On')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -375,7 +375,7 @@
                         <p class="text-gray-600 mb-4">High-performance athletic shoes with energy-returning sole</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹8,799</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Athletic Boost')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -392,7 +392,7 @@
                         <p class="text-gray-600 mb-4">Sophisticated loafers for formal and semi-formal occasions</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹7,499</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Elegant Loafer')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -409,7 +409,7 @@
                         <p class="text-gray-600 mb-4">Insulated boots to keep your feet warm in cold weather</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹12,999</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Winter Warmth')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -426,7 +426,7 @@
                         <p class="text-gray-600 mb-4">Light and breathable sandals for hot weather</p>
                         <div class="flex justify-between items-center">
                             <span class="text-xl font-bold text-gray-900">₹3,499</span>
-                            <button onclick="event.stopPropagation(); toggleFavorite(this)" class="text-red-500 hover:text-red-700">
+                            <button onclick="event.stopPropagation(); toggleFavorite(this, 'Summer Breeze')" class="favorite-icon text-red-500 hover:text-red-700 hidden">
                                 <i class="far fa-heart"></i>
                             </button>
                         </div>
@@ -779,21 +779,12 @@
                     document.getElementById('loginForm').reset();
                     document.getElementById('openAuthModal').classList.add('hidden');
                     document.getElementById('logoutButton').classList.remove('hidden');
-                    // Load cart from Firebase
-                    const userId = user.uid;
-                    const cartRef = database.ref('carts/' + userId);
-                    cartRef.once('value')
-                        .then((snapshot) => {
-                            const savedCart = snapshot.val();
-                            if (savedCart) {
-                                cart = savedCart;
-                                localStorage.setItem('cart', JSON.stringify(cart));
-                                updateCartCount();
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Error loading cart from Firebase: ', error);
-                        });
+                    // Show favorite icons
+                    document.querySelectorAll('.favorite-icon').forEach(icon => {
+                        icon.classList.remove('hidden');
+                    });
+                    // Load favorites from Firebase
+                    loadFavorites(user.uid);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -820,6 +811,10 @@
                     document.getElementById('signupForm').reset();
                     document.getElementById('openAuthModal').classList.add('hidden');
                     document.getElementById('logoutButton').classList.remove('hidden');
+                    // Show favorite icons
+                    document.querySelectorAll('.favorite-icon').forEach(icon => {
+                        icon.classList.remove('hidden');
+                    });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -833,7 +828,10 @@
                 alert('Logout successful!');
                 document.getElementById('logoutButton').classList.add('hidden');
                 document.getElementById('openAuthModal').classList.remove('hidden');
-                localStorage.removeItem('cart'); // Clear local storage on logout
+                // Hide favorite icons
+                document.querySelectorAll('.favorite-icon').forEach(icon => {
+                    icon.classList.add('hidden');
+                });
             }).catch((error) => {
                 alert('Logout failed: ' + error.message);
             });
@@ -1008,53 +1006,83 @@
         }
         // Function to remove an item from the cart
         function removeFromCart(index) {
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            displayCartItems();
-            // Save the updated cart to Firebase
-            const userId = user.uid;
-            const cartRef = database.ref('carts/' + userId);
-            cartRef.set(cart)
-                .then(() => {
-                    console.log('Cart updated in Firebase');
-                })
-                .catch((error) => {
-                    console.error('Error updating cart in Firebase: ', error);
-                });
-        } else {
-            console.error('User is not authenticated');
-        }
-    });
-    }
-        auth.onAuthStateChanged((user) => {
-    if (user) {
-        // User is signed in
-        document.getElementById('openAuthModal').classList.add('hidden');
-        document.getElementById('logoutButton').classList.remove('hidden');
-        // Load cart from Firebase
-        const userId = user.uid;
-        const cartRef = database.ref('carts/' + userId);
-        cartRef.once('value')
-            .then((snapshot) => {
-                const savedCart = snapshot.val();
-                if (savedCart) {
-                    cart = savedCart;
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    cart.splice(index, 1);
                     localStorage.setItem('cart', JSON.stringify(cart));
                     updateCartCount();
+                    displayCartItems();
+                    // Save the updated cart to Firebase
+                    const userId = user.uid;
+                    const cartRef = database.ref('carts/' + userId);
+                    cartRef.set(cart)
+                        .then(() => {
+                            console.log('Cart updated in Firebase');
+                        })
+                        .catch((error) => {
+                            console.error('Error updating cart in Firebase: ', error);
+                        });
+                } else {
+                    console.error('User is not authenticated');
                 }
-            })
-            .catch((error) => {
-                console.error('Error loading cart from Firebase: ', error);
             });
-    } else {
-        // User is signed out
-        document.getElementById('openAuthModal').classList.remove('hidden');
-        document.getElementById('logoutButton').classList.add('hidden');
-    }
-});
+        }
+        // Function to load favorites from Firebase
+        function loadFavorites(userId) {
+            const favoritesRef = database.ref('favorites/' + userId);
+            favoritesRef.once('value')
+                .then((snapshot) => {
+                    const favorites = snapshot.val();
+                    if (favorites) {
+                        Object.keys(favorites).forEach(productName => {
+                            const favoriteButtons = document.querySelectorAll(`.favorite-icon[onclick*="${productName}"]`);
+                            favoriteButtons.forEach(button => {
+                                const icon = button.querySelector('i');
+                                icon.classList.remove('far');
+                                icon.classList.add('fas');
+                            });
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error loading favorites from Firebase: ', error);
+                });
+        }
+        // Function to toggle favorite status
+        function toggleFavorite(button, productName) {
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    const icon = button.querySelector('i');
+                    const userId = user.uid;
+                    const favoritesRef = database.ref('favorites/' + userId);
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        // Save to Firebase
+                        favoritesRef.child(productName).set(true);
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        // Remove from Firebase
+                        favoritesRef.child(productName).remove();
+                    }
+                } else {
+                    document.getElementById('authModal').classList.remove('hidden');
+                }
+            });
+        }
+        // Initialize cart count on page load
+        updateCartCount();
+        // View All Products functionality
+        document.getElementById('view-all-products').addEventListener('click', function() {
+            const additionalProducts = document.querySelectorAll('.additional-product');
+            const viewAllButton = document.getElementById('view-all-products');
+            additionalProducts.forEach(product => {
+                product.classList.remove('hidden');
+                product.classList.add('slide-down');
+            });
+            viewAllButton.style.display = 'none';
+        });
         // Event listener for the cart link in the navigation bar
         document.querySelector('a[href="#cart"]').addEventListener('click', function(e) {
             e.preventDefault();
@@ -1072,30 +1100,6 @@
             alert('Proceeding to checkout...');
             // You can add more functionality here, like redirecting to a checkout page
         });
-        // Initialize cart count on page load
-        updateCartCount();
-        // View All Products functionality
-        document.getElementById('view-all-products').addEventListener('click', function() {
-            const additionalProducts = document.querySelectorAll('.additional-product');
-            const viewAllButton = document.getElementById('view-all-products');
-            additionalProducts.forEach(product => {
-                product.classList.remove('hidden');
-                product.classList.add('slide-down');
-            });
-            viewAllButton.style.display = 'none';
-        });
-
-        // Function to toggle favorite status
-        function toggleFavorite(button) {
-            const icon = button.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-            }
-        }
     </script>
 </body>
 </html>
