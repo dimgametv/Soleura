@@ -836,6 +836,26 @@
                 alert('Logout failed: ' + error.message);
             });
         });
+        // Check authentication state on page load
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('openAuthModal').classList.add('hidden');
+                document.getElementById('logoutButton').classList.remove('hidden');
+                // Show favorite icons
+                document.querySelectorAll('.favorite-icon').forEach(icon => {
+                    icon.classList.remove('hidden');
+                });
+                // Load favorites from Firebase
+                loadFavorites(user.uid);
+            } else {
+                document.getElementById('openAuthModal').classList.remove('hidden');
+                document.getElementById('logoutButton').classList.add('hidden');
+                // Hide favorite icons
+                document.querySelectorAll('.favorite-icon').forEach(icon => {
+                    icon.classList.add('hidden');
+                });
+            }
+        });
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
